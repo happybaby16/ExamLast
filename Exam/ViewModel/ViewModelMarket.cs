@@ -274,11 +274,19 @@ namespace Exam.ViewModel
         public CommandBinding BuyBooksBinding;
         public void BuyBooks(object sender, EventArgs e)
         {
+            double totalPrice=0;
+
+            foreach (var item in BooksBag)
+            {
+                totalPrice += item.PriceWithoutDiscount;
+            }
+
+
             bool isHaveWarehouse = false;
 
             Order newOrder = new Order();
             newOrder.CountBook = CountBooksInBag;
-            newOrder.TotalPrice = GetTotalPriceWithDiscount;
+            newOrder.TotalPrice = totalPrice;
             newOrder.Discount = discount;
             foreach (BookBag item in BooksBag)
             {
@@ -308,14 +316,6 @@ namespace Exam.ViewModel
                 
             }
             DataBase.Tables.SaveChanges();
-
-            foreach (var item in BooksBag)
-            {
-                Book selecBook = DataBase.Tables.Book.Single(x => x == item.BagBook);
-                selecBook.CountMarket -= item.FromMarket;
-                selecBook.CountWarehouse -= item.FromWarehouse;
-                DataBase.Tables.SaveChanges();
-            }
 
             if (isHaveWarehouse)
             {
