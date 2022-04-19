@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище P_Nagornev_ExamModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Genre" Type="varchar" MaxLength="50" />
+          <Property Name="Author" Type="varchar" MaxLength="50" />
+          <Property Name="CountMarket" Type="int" />
+          <Property Name="CountWarehouse" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BookOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Book" Type="int" />
+          <Property Name="ID_Order" Type="int" />
+          <Property Name="ID_From" Type="int" />
+        </EntityType>
+        <EntityType Name="From">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="FromName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountBook" Type="int" />
+          <Property Name="TotalPrice" Type="float" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="RegistrationDate" Type="date" />
+          <Property Name="WarehouseDate" Type="date" />
+          <Property Name="BookingDate" Type="date" />
+        </EntityType>
+        <Association Name="FK_BookOrder_Books">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="BookOrder" Type="Self.BookOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookOrder">
+              <PropertyRef Name="ID_Book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOrder_From">
+          <End Role="From" Type="Self.From" Multiplicity="0..1" />
+          <End Role="BookOrder" Type="Self.BookOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="From">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookOrder">
+              <PropertyRef Name="ID_From" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOrder_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="BookOrder" Type="Self.BookOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookOrder">
+              <PropertyRef Name="ID_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище P_Nagornev_ExamModelContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookOrder" EntityType="Self.BookOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="From" EntityType="Self.From" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BookOrder_Books" Association="Self.FK_BookOrder_Books">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BookOrder" EntitySet="BookOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOrder_From" Association="Self.FK_BookOrder_From">
+            <End Role="From" EntitySet="From" />
+            <End Role="BookOrder" EntitySet="BookOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOrder_Order" Association="Self.FK_BookOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="BookOrder" EntitySet="BookOrder" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="P_Nagornev_ExamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Book" EntityType="P_Nagornev_ExamModel.Book" />
+          <EntitySet Name="BookOrder" EntityType="P_Nagornev_ExamModel.BookOrder" />
+          <EntitySet Name="From" EntityType="P_Nagornev_ExamModel.From" />
+          <EntitySet Name="Order" EntityType="P_Nagornev_ExamModel.Order" />
+          <AssociationSet Name="FK_BookOrder_Books" Association="P_Nagornev_ExamModel.FK_BookOrder_Books">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BookOrder" EntitySet="BookOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOrder_From" Association="P_Nagornev_ExamModel.FK_BookOrder_From">
+            <End Role="From" EntitySet="From" />
+            <End Role="BookOrder" EntitySet="BookOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOrder_Order" Association="P_Nagornev_ExamModel.FK_BookOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="BookOrder" EntitySet="BookOrder" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Genre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CountMarket" Type="Int32" />
+          <Property Name="CountWarehouse" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BookOrder" Relationship="P_Nagornev_ExamModel.FK_BookOrder_Books" FromRole="Book" ToRole="BookOrder" />
+        </EntityType>
+        <EntityType Name="BookOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Book" Type="Int32" />
+          <Property Name="ID_Order" Type="Int32" />
+          <Property Name="ID_From" Type="Int32" />
+          <NavigationProperty Name="Book" Relationship="P_Nagornev_ExamModel.FK_BookOrder_Books" FromRole="BookOrder" ToRole="Book" />
+          <NavigationProperty Name="From" Relationship="P_Nagornev_ExamModel.FK_BookOrder_From" FromRole="BookOrder" ToRole="From" />
+          <NavigationProperty Name="Order" Relationship="P_Nagornev_ExamModel.FK_BookOrder_Order" FromRole="BookOrder" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="From">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="FromName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BookOrder" Relationship="P_Nagornev_ExamModel.FK_BookOrder_From" FromRole="From" ToRole="BookOrder" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountBook" Type="Int32" />
+          <Property Name="TotalPrice" Type="Double" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
+          <Property Name="WarehouseDate" Type="DateTime" Precision="0" />
+          <Property Name="BookingDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BookOrder" Relationship="P_Nagornev_ExamModel.FK_BookOrder_Order" FromRole="Order" ToRole="BookOrder" />
+        </EntityType>
+        <Association Name="FK_BookOrder_Books">
+          <End Type="P_Nagornev_ExamModel.Book" Role="Book" Multiplicity="0..1" />
+          <End Type="P_Nagornev_ExamModel.BookOrder" Role="BookOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookOrder">
+              <PropertyRef Name="ID_Book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOrder_From">
+          <End Type="P_Nagornev_ExamModel.From" Role="From" Multiplicity="0..1" />
+          <End Type="P_Nagornev_ExamModel.BookOrder" Role="BookOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="From">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookOrder">
+              <PropertyRef Name="ID_From" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOrder_Order">
+          <End Type="P_Nagornev_ExamModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="P_Nagornev_ExamModel.BookOrder" Role="BookOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookOrder">
+              <PropertyRef Name="ID_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище P_Nagornev_ExamModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Book">
+            <EntityTypeMapping TypeName="P_Nagornev_ExamModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CountWarehouse" ColumnName="CountWarehouse" />
+                <ScalarProperty Name="CountMarket" ColumnName="CountMarket" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookOrder">
+            <EntityTypeMapping TypeName="P_Nagornev_ExamModel.BookOrder">
+              <MappingFragment StoreEntitySet="BookOrder">
+                <ScalarProperty Name="ID_From" ColumnName="ID_From" />
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="From">
+            <EntityTypeMapping TypeName="P_Nagornev_ExamModel.From">
+              <MappingFragment StoreEntitySet="From">
+                <ScalarProperty Name="FromName" ColumnName="FromName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="P_Nagornev_ExamModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="WarehouseDate" ColumnName="WarehouseDate" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="CountBook" ColumnName="CountBook" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

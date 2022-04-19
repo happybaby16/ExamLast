@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b40e9464ed5147069cefbe57c385d88b" Name="Diagram1">
+        <EntityTypeShape EntityType="P_Nagornev_ExamModel.Book" Width="1.5" PointX="1.375" PointY="0.5" />
+        <EntityTypeShape EntityType="P_Nagornev_ExamModel.BookOrder" Width="1.5" PointX="6.875" PointY="0.5" />
+        <EntityTypeShape EntityType="P_Nagornev_ExamModel.From" Width="1.5" PointX="8.125" PointY="3.625" />
+        <EntityTypeShape EntityType="P_Nagornev_ExamModel.Order" Width="1.5" PointX="3.75" PointY="3.25" />
+        <AssociationConnector Association="P_Nagornev_ExamModel.FK_BookOrder_Books" />
+        <AssociationConnector Association="P_Nagornev_ExamModel.FK_BookOrder_From" />
+        <AssociationConnector Association="P_Nagornev_ExamModel.FK_BookOrder_Order" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

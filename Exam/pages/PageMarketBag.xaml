@@ -1,0 +1,62 @@
+﻿<Page x:Class="Exam.pages.PageMarketBag"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Exam.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageMarketBag">
+
+    <Page.Resources>
+        <DataTemplate x:Key="itemInBag">
+            <StackPanel Background="Transparent" Orientation="Horizontal">
+                <Image Width="200" Height="200" Source="{Binding Path=BagBook.ActualImage}"/>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Название:</TextBlock>
+                        <TextBlock Text="{Binding Path=BagBook.Title}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Автор:</TextBlock>
+                        <TextBlock Text="{Binding Path=Author}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Цена:</TextBlock>
+                        <TextBlock Text="{Binding Path=PriceWithDiscount}"/>
+                        <TextBlock> руб.</TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Количество: </TextBlock>
+                        <TextBlock Text="{Binding Path=BookCount}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Количество на складе:</TextBlock>
+                        <TextBlock Text="{Binding Path=CountWarehouse}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=StringDesc}" Width="500" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+        <DockPanel>
+            <Button Click="Button_Back">Назад в магазин</Button>
+            <Button Command="{Binding BuyBooksCommand}">Купить</Button>
+        </DockPanel>
+            <StackPanel Orientation="Vertical">
+                <Button Command="{Binding AddBookFromBagCommand}">Добавить одну книжу</Button>
+                <Button Command="{Binding RemoveBookFromBagCommand}">Удалить одну книжку</Button>
+                <Button Command="{Binding RemoveAllCommand}">Удалить все</Button>
+            </StackPanel>
+        </StackPanel>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Path=BooksBag}" ItemTemplate="{StaticResource itemInBag}" SelectedItem="{Binding SelectedBookBag}"/>
+    </Grid>
+</Page>
