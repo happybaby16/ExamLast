@@ -25,5 +25,12 @@ namespace TestProject
             double answer = DiscountDLL.Discount.Get(1, 900);
             Assert.AreEqual(0.01, answer);
         }
+
+        [TestMethod]
+        public void DiscountCountAndPriceTest()
+        {
+            double answer = DiscountDLL.Discount.Get(3, 900);
+            Assert.AreEqual(0.06, answer);
+        }
     }
 }
