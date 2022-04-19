@@ -73,7 +73,7 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <DockPanel>
-            <Button Click="Button_ToBag">Перейти в корзину</Button>
+            <Button Click="Button_ToBag">Посмотреть содержание корзины</Button>
             <StackPanel Orientation="Vertical" DockPanel.Dock="Right" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock>Количество выбранных книг:</TextBlock>
