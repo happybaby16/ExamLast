@@ -19,7 +19,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>Автор:</TextBlock>
-                        <TextBlock Text="{Binding Path=Author}"/>
+                        <TextBlock Text="{Binding Path=BagBook.Author}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>Цена:</TextBlock>
@@ -27,12 +27,8 @@
                         <TextBlock> руб.</TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock>Количество: </TextBlock>
+                        <TextBlock>Количество:</TextBlock>
                         <TextBlock Text="{Binding Path=BookCount}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock>Количество на складе:</TextBlock>
-                        <TextBlock Text="{Binding Path=CountWarehouse}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=StringDesc}" Width="500" TextWrapping="Wrap"/>
